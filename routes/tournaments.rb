@@ -30,7 +30,6 @@ get '/stop_tournament_broadcast/:tournament_id' do
     [404, "Tournament not found"]
   end
 end
-end
 
 get '/rounds/:tournament_id' do
 end
