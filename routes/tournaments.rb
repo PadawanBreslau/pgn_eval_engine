@@ -6,6 +6,8 @@ post '/create_new_tournament/' do
     data = JSON.parse(request.body.read)
     Tournament.create!(url: data['url'], is_finished: true)
     [201, Tournament.last.id.to_s]
+  rescue ActiveRecord::RecordInvalid => e
+    [422, "Tournament not saved - #{e.message}"]
   rescue StandardError => e
     [409, "Tournament not created - #{e.message}"]
   end
