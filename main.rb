@@ -1,26 +1,15 @@
 # encoding: UTF-8
 require 'json'
 require 'sinatra'
-require 'data_mapper'
-require 'dm-migrations'
+require 'sinatra/activerecord'
 
-configure :development do
-  DataMapper::Logger.new($stdout, :debug)
-  DataMapper.setup(
-    :default,
-    'mysql://root:12345@localhost/sinatra_service'
-  )
-end
+ActiveRecord::Base.establish_connection(
+  :adapter  => "mysql2",
+  :username => "root",
+  :password => "",
+  :database => "pgn_eval"
+)
 
-configure :production do
-  DataMapper.setup(
-    :default,
-    'mysql://root:12345@localhost/sinatra_service'
-  )
-end
-
-#require './models/init'
+require './models/init'
 #require './helpers/init'
 require './routes/init'
-
-DataMapper.finalize
