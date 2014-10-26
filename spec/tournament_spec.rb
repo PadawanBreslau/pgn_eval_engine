@@ -42,6 +42,7 @@ describe 'Pgn Eval Enging' do
   context 'start and end tournament broadcast' do
     DatabaseCleaner.cleaning do
       before do
+        Tournament.delete_all
         header = {'Content-Type' => 'application/json'}
         body = { url: 'http://some.url/trans2.pgn' }.to_json
         post '/create_new_tournament/', body, header

@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20141025134408) do
 
   create_table "rounds", force: true do |t|
     t.integer  "tournament_id"
+    t.integer  "number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
