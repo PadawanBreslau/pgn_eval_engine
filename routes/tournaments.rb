@@ -1,5 +1,27 @@
 # encoding: UTF-8
 require 'json'
+require_relative '../helpers/engine_helper'
+
+get '/tournaments' do
+  @tournaments = Tournament.all
+  @tournaments.map do |t|
+    @on = " ONLINE" unless t.is_finished
+    t.id.to_s + '.' + t.url + @on + '\n'
+  end
+end
+
+get '/tournaments/:tournament_id/force_update' do
+  begin
+    @tournament = Tournament.find(params['tournament_id'])
+    file = EngineHelper.download_file(@tournament.url, @tournament.id)
+    parsed_file = EngineHelper.byz_parse_file(file)
+    EngineHelper.update_tournament_games(@tournament, parsed_file)
+    EngineHelper.analyse_new_moves(@tournament)
+    [200, "OK"]
+  rescue StandardError => e
+    [404, e.message]
+  end
+end
 
 post '/create_new_tournament/' do
   begin
@@ -34,5 +56,11 @@ get '/stop_tournament_broadcast/:tournament_id' do
 end
 
 get '/rounds/:tournament_id' do
+  begin
+    @tournament = Tournament.find(params['tournament_id'])
+    [200, @tournament.rounds.map(&:id).join(',')]
+  rescue
+    [404, "Tournament not found"]
+  end
 end
 
