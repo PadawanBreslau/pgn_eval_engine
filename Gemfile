@@ -8,6 +8,7 @@ gem 'sinatra-activerecord'
 gem 'mysql2'
 gem 'rake'
 gem 'pry'
+gem 'passenger'
 
 group :test, :development do
   gem 'rspec'

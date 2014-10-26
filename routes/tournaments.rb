@@ -14,9 +14,11 @@ get '/tournaments/:tournament_id/force_update' do
   begin
     @tournament = Tournament.find(params['tournament_id'])
     file = EngineHelper.download_file(@tournament.url, @tournament.id)
-    parsed_file = EngineHelper.byz_parse_file(file)
-    EngineHelper.update_tournament_games(@tournament, parsed_file)
-    EngineHelper.analyse_new_moves(@tournament)
+    if EngineHelper.new_moves?(file, @tournament.id)
+      parsed_file = EngineHelper.byz_parse_file(file)
+      EngineHelper.update_tournament_games(@tournament, parsed_file)
+      EngineHelper.analyse_new_moves(@tournament)
+    end
     [200, "OK"]
   rescue StandardError => e
     [404, e.message]
