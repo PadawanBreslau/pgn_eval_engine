@@ -1,6 +1,6 @@
 ENV['RACK_ENV'] = 'test'
 
-require_relative './../main'
+require_relative './../pgn_eval_server'
 require 'spec_helper'
 
 describe 'Pgn Eval Enging' do
