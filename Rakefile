@@ -1,7 +1,7 @@
 # Rakefile
 require "sinatra/activerecord/rake"
 require 'rspec/core/rake_task'
-require "./main"
+require "./pgn_eval_server"
 
 RSpec::Core::RakeTask.new :specs do |task|
 task.pattern = Dir['spec/**/*_spec.rb']

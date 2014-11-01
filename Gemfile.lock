@@ -33,6 +33,7 @@ GEM
       daemon_controller (>= 1.2.0)
       rack
       rake (>= 0.8.1)
+    polyglot (0.3.3)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -61,6 +62,8 @@ GEM
     slop (3.6.0)
     thread_safe (0.3.4)
     tilt (1.4.1)
+    treetop (1.5.3)
+      polyglot (~> 0.3)
     tzinfo (0.3.41)
 
 PLATFORMS
@@ -78,3 +81,4 @@ DEPENDENCIES
   rspec
   sinatra (= 1.4.4)
   sinatra-activerecord
+  treetop

@@ -9,6 +9,7 @@ gem 'mysql2'
 gem 'rake'
 gem 'pry'
 gem 'passenger'
+gem 'treetop'
 
 group :test, :development do
   gem 'rspec'

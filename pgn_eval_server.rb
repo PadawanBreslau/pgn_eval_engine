@@ -11,5 +11,5 @@ ActiveRecord::Base.establish_connection(
 )
 
 require './models/init'
-#require './helpers/init'
+require './helpers/init'
 require './routes/init'
