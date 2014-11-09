@@ -7,4 +7,10 @@ get '/moves/:game_id' do
   rescue
     [404, "No game found"]
   end
+
+end
+
+get '/moves/:move_id/analyse' do
+  move = Move.find_by_id(params['move_id'])
+  EngineHelper.analyse_move(move.fen_after) if move
 end

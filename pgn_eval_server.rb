@@ -2,6 +2,7 @@
 require 'json'
 require 'sinatra'
 require 'sinatra/activerecord'
+require 'sidekiq'
 
 ActiveRecord::Base.establish_connection(
   :adapter  => "mysql2",

@@ -10,6 +10,9 @@ gem 'rake'
 gem 'pry'
 gem 'passenger'
 gem 'treetop'
+gem 'sidekiq'
+gem 'philio_uci'
+
 
 group :test, :development do
   gem 'rspec'

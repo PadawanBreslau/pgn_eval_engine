@@ -19,6 +19,7 @@ get '/tournaments/:tournament_id/force_update' do
     end
     [200, "OK"]
   rescue StandardError => e
+    ER_LOG.error e.backtrace
     [404, e.message]
   end
 end
