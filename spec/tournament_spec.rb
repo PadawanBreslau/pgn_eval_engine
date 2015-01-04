@@ -52,11 +52,11 @@ describe 'Pgn Eval Enging' do
         @tournament = Tournament.last
         @tournament.should_not be_nil
         @tournament.is_finished.should be_true
-        get "/start_tournament_broadcast/#{@tournament.id}"
+        get "/tournaments/#{@tournament.id}/start_broadcast"
         last_response.status.should eq 200
         @tournament.reload
         @tournament.is_finished.should be_false
-        get "/stop_tournament_broadcast/#{@tournament.id}"
+        get "/tournaments/#{@tournament.id}/stop_broadcast"
         last_response.status.should eq 200
         @tournament.reload
         @tournament.is_finished.should be_true

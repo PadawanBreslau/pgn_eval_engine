@@ -29,7 +29,7 @@ describe 'GameAnalysis' do
       end
 
       it 'should list all games of tournament' do
-        get "/games/#{@tournament_id}"
+        get "/tournaments/#{@tournament_id}/games"
         last_response.status.should eq 200
         last_response.body.should eq @game_ids.join(',')
       end
@@ -40,7 +40,7 @@ describe 'GameAnalysis' do
       end
 
       it 'should list all games of tournament' do
-        get "/round_games/#{@round_id}"
+        get "/rounds/#{@round_id}/games"
         last_response.status.should eq 200
         last_response.body.should eq @round_game_ids.join(',')
       end

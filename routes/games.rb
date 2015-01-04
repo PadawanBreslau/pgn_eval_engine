@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
-get '/games/:tournament_id' do
+#Return all games of the tournament
+get '/tournaments/:tournament_id/games' do
   begin
     tournament = Tournament.find(params['tournament_id'].to_i)
     games = tournament.game_analysis
@@ -11,7 +12,8 @@ get '/games/:tournament_id' do
   end
 end
 
-get '/round_games/:round_id' do
+#Return all games of one round
+get '/rounds/:round_id/games' do
   begin
     round = Round.find(params['round_id'].to_i)
     res = round.game_analysis.map(&:id)

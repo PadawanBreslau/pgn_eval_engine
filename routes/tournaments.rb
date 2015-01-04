@@ -2,6 +2,7 @@
 require 'json'
 require_relative '../helpers/engine_helper'
 
+# list of all tournaments
 get '/tournaments' do
   @tournaments = Tournament.all
   @tournaments.map do |t|
@@ -10,6 +11,7 @@ get '/tournaments' do
   end
 end
 
+## Forces to download current pgn file
 get '/tournaments/:tournament_id/force_update' do
   begin
     @tournament = Tournament.find(params['tournament_id'])
@@ -24,6 +26,7 @@ get '/tournaments/:tournament_id/force_update' do
   end
 end
 
+# Adds a new tournament to be analysed
 post '/create_new_tournament/' do
   begin
     data = JSON.parse(request.body.read)
@@ -36,7 +39,8 @@ post '/create_new_tournament/' do
   end
 end
 
-get '/start_tournament_broadcast/:tournament_id' do
+## Updates is_finished attribute to true
+get '/tournaments/:tournament_id/start_broadcast' do
   begin
     @tournament = Tournament.find(params['tournament_id'])
     @tournament.update_attribute(:is_finished, false)
@@ -46,7 +50,8 @@ get '/start_tournament_broadcast/:tournament_id' do
   end
 end
 
-get '/stop_tournament_broadcast/:tournament_id' do
+## Updates is_finished attribute to false
+get '/tournaments/:tournament_id/stop_broadcast' do
   begin
     @tournament = Tournament.find(params['tournament_id'])
     @tournament.update_attribute(:is_finished, true)
@@ -56,7 +61,8 @@ get '/stop_tournament_broadcast/:tournament_id' do
   end
 end
 
-get '/rounds/:tournament_id' do
+# Returns all round of one tournament
+get '/tournament/:tournament_id/rounds' do
   begin
     @tournament = Tournament.find(params['tournament_id'])
     [200, @tournament.rounds.map(&:id).join(',')]
